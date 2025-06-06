@@ -24,6 +24,7 @@ RUN echo '#!/bin/sh' > /usr/local/bin/run_castarsdk.sh && \
     echo '  i386|i686) BINARY=CastarSdk_386 ;;' >> /usr/local/bin/run_castarsdk.sh && \
     echo '  *) echo "Unsupported architecture: $ARCH"; exit 1 ;;' >> /usr/local/bin/run_castarsdk.sh && \
     echo 'esac' >> /usr/local/bin/run_castarsdk.sh && \
+    echo 'echo "Starting CastarSDK. Check your earnings after 24 hours in dashboard"' >> /usr/local/bin/run_castarsdk.sh && \
     echo 'exec /usr/local/bin/$BINARY -key=$KEY' >> /usr/local/bin/run_castarsdk.sh && \
     chmod +x /usr/local/bin/run_castarsdk.sh
 
