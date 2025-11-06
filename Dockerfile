@@ -11,12 +11,10 @@ RUN apk add --no-cache wget unzip
 # 4. Clean up
 # ------------------------------------------------------------------
 RUN wget https://download.castarsdk.com/linux.zip -O /tmp/linux.zip && \
-    unzip /tmp/linux.zip 'linux-sdk/*' -d /tmp && \
+    unzip /tmp/linux.zip -d /tmp && \
     mv /tmp/linux-sdk/* /usr/local/bin/ && \
+    chmod +x /usr/local/bin/CastarSdk_* && \
     rm -rf /tmp/linux.zip /tmp/linux-sdk
-
-# Ensure the binaries are executable
-RUN chmod +x /usr/local/bin/CastarSdk_386 /usr/local/bin/CastarSdk_amd64 /usr/local/bin/CastarSdk_arm
 
 # Create a script to detect architecture and run the appropriate binary
 RUN echo '#!/bin/sh' > /usr/local/bin/run_castarsdk.sh && \
