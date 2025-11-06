@@ -4,10 +4,16 @@ FROM alpine:latest
 # Install required packages (wget and unzip)
 RUN apk add --no-cache wget unzip
 
-# Download and unzip the CastarSDK
+# ------------------------------------------------------------------
+# 1. Download the zip
+# 2. Extract ONLY the files that live under linux-sdk/
+# 3. Move them up one level into /usr/local/bin
+# 4. Clean up
+# ------------------------------------------------------------------
 RUN wget https://download.castarsdk.com/linux.zip -O /tmp/linux.zip && \
-    unzip /tmp/linux.zip -d /usr/local/bin && \
-    rm /tmp/linux.zip
+    unzip /tmp/linux.zip 'linux-sdk/*' -d /tmp && \
+    mv /tmp/linux-sdk/* /usr/local/bin/ && \
+    rm -rf /tmp/linux.zip /tmp/linux-sdk
 
 # Ensure the binaries are executable
 RUN chmod +x /usr/local/bin/CastarSdk_386 /usr/local/bin/CastarSdk_amd64 /usr/local/bin/CastarSdk_arm
