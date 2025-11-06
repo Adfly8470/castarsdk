@@ -34,3 +34,4 @@ RUN echo '#!/bin/sh' > /usr/local/bin/run_castarsdk.sh && \
 
 # Command to run the architecture detection script
 CMD ["/usr/local/bin/run_castarsdk.sh"]
+
